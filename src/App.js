@@ -41,7 +41,7 @@ function App() {
       sumLeft += Number(inputValues[i]);
     }
 
-    // If no pivot index is found, set it to null.
+    // If no pivot index is found, set it to -1.
     setPivotIndex(-1);
   };
 
