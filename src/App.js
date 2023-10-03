@@ -5,9 +5,15 @@ function App() {
   const [inputCount, setInputCount] = useState(1);
   const [inputValues, setInputValues] = useState([""]);
   const [pivotIndex, setPivotIndex] = useState(null);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   const handleNext = () => {
-    setShowInitialInputs(false);
+    if (firstName && lastName) {
+      setShowInitialInputs(false);
+    } else {
+      alert("Please fill in both First Name and Last Name.");
+    }
   };
 
   const handleAddInput = () => {
@@ -46,14 +52,16 @@ function App() {
           <input
             type="text"
             placeholder="First Name"
-            onChange={(e) =>
-              setInputValues([e.target.value, ...inputValues.slice(1)])
-            }
+            required={true}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
           />
           <input
             type="text"
+            required={true}
             placeholder="Last Name"
-            onChange={(e) => setInputValues([inputValues[0], e.target.value])}
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
           />
           <button onClick={handleNext}>Next</button>
         </div>
@@ -62,8 +70,9 @@ function App() {
           {inputValues.map((value, index) => (
             <div key={index}>
               <input
-                type="text"
+                type="number"
                 value={value}
+                required={true}
                 onChange={(e) => {
                   const newInputValues = [...inputValues];
                   newInputValues[index] = e.target.value;
